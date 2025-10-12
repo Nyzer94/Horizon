@@ -1,64 +1,147 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HORIZON</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Guntur:wght@400;600&family=Le+Monde+Livre+Std&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HORIZON — Un jour à la fois</title>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Guntur:wght@400;600&family=Le+Monde+Livre+Std&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">🌿 HORIZON</div>
-            <ul>
-                <li><a href="#about">À propos</a></li>
-                <li><a href="#features">Fonctionnalités</a></li>
-                <li><a href="#download">Télécharger</a></li>
-            </ul>
-        </nav>
-        <div class="hero">
-            <h1>SORTIE ../../2026</h1>
-            <p>Note ton humeur, observe ton évolution, et trouve des conseils pour retrouver ton équilibre émotionnel.</p>
-            <a href="#download" class="cta">Découvrir l’app</a>
-        </div>
-    </header>
+  <header>
+    <nav>
+      <div class="logo">🌿 HORIZON</div>
+      <ul>
+        <li><a href="#about">À propos</a></li>
+        <li><a href="#features">Fonctionnalités</a></li>
+        <li><a href="#download">Télécharger</a></li>
+      </ul>
+    </nav>
 
+    <div class="hero">
+      <h1 id="countdown" style="font-size:2.5rem;"></h1>
+      <p>Note ton humeur, observe ton évolution, et trouve des conseils pour retrouver ton équilibre émotionnel.</p>
+      <a href="#download" class="cta">Découvrir l’app</a>
+      <script>
+        // Compte à rebours jusqu'au 15 janvier 2026
+        function updateCountdown() {
+          const targetDate = new Date('2026-01-15T00:00:00');
+          const now = new Date();
+          const diff = targetDate - now;
+          if (diff <= 0) {
+            document.getElementById('countdown').textContent = "Lancement aujourd'hui !";
+            return;
+          }
+          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+          const minutes = Math.floor((diff / (1000 * 60)) % 60);
+          const seconds = Math.floor((diff / 1000) % 60);
+          document.getElementById('countdown').textContent = `Lancement dans ${days}j ${hours}h ${minutes}m ${seconds}s`;
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+      </script>
+    </div>
+  </header>
+
+  <main>
     <section id="about" class="section light">
-        <div class="container">
-            <h2>🧘‍♀️ Ton espace émotionnel</h2>
-            <p><strong>Life is Yours</strong> t’aide à comprendre ton humeur au fil du temps.  
-            Grâce à un calendrier intuitif et des graphiques simples, tu peux suivre ton bien-être et cultiver ta sérénité.</p>
-        </div>
+      <div class="container">
+        <h2>🧘‍♀️ Ton espace émotionnel</h2>
+        <p><strong>Life is Yours</strong> t’aide à comprendre ton humeur au fil du temps. Grâce à un calendrier intuitif et des graphiques simples, tu peux suivre ton bien-être et cultiver ta sérénité.</p>
+      </div>
     </section>
 
     <section id="features" class="section">
-        <div class="container grid">
-            <div class="card">
-                <h3>📅 Journal quotidien</h3>
-                <p>Note tes émotions, ajoute une photo ou une réflexion. Garde une trace de ton ressenti jour après jour.</p>
-            </div>
-            <div class="card">
-                <h3>📊 Suivi d’humeur</h3>
-                <p>Visualise ton bien-être grâce à des courbes claires et colorées. Repère les tendances et apprends à mieux te connaître.</p>
-            </div>
-            <div class="card">
-                <h3>🌈 Minimal et apaisant</h3>
-                <p>Design doux, interface fluide, tout est pensé pour une expérience calme et bienveillante.</p>
-            </div>
-        </div>
+      <div class="container grid features-grid">
+        <!-- Boutons déclencheurs -->
+        <button class="card" data-modal="journal">
+          <h3>📅 Journal quotidien</h3>
+          <p>Note tes émotions, ajoute une photo ou une réflexion. Garde une trace de ton ressenti jour après jour.</p>
+        </button>
+
+        <button class="card" data-modal="suivi">
+          <h3>📊 Suivi d’humeur</h3>
+          <p>Visualise ton bien-être grâce à des courbes claires. Repère les tendances et apprends à mieux te connaître.</p>
+        </button>
+
+        <button class="card" data-modal="minimal">
+          <h3>🌈 Minimal et apaisant</h3>
+          <p>Interface douce et sans distraction pour te concentrer sur l’essentiel : ton ressenti.</p>
+        </button>
+      </div>
     </section>
 
     <section id="download" class="section light">
-        <div class="container">
-            <h2>📲 Bientôt disponible</h2>
-            <p>L’app arrive sur iOS — reste connecté pour le lancement officiel.</p>
-            <a href="#" class="cta">Me prévenir du lancement</a>
-        </div>
+      <div class="container">
+        <h2>📲 Bientôt disponible</h2>
+        <p>L’app arrive sur iOS — inscris-toi pour la bêta et les updates.</p>
+        <a href="#" class="cta">Me prévenir du lancement</a>
+      </div>
     </section>
+  </main>
 
-    <footer>
-        <p>© 2025 Life is Yours • Créé avec 🌿 par Rayan et l’équipe</p>
-    </footer>
+  <footer>
+    <p>© 2025 Life is Yours • Créé avec 🌿 par Rayan & l’équipe</p>
+  </footer>
+
+  <!-- 🌿 POPUPS -->
+  <div class="modal-overlay" id="modal-overlay"></div>
+
+  <div class="modal" id="modal-journal">
+    <div class="modal-content">
+      <img src="https://source.unsplash.com/featured/?journal,writing,calm" alt="">
+      <div class="modal-text">
+        <h2>Journal quotidien</h2>
+        <p>Note chaque journée avec une phrase, un mot ou une émotion. Ces petites traces deviennent ton miroir émotionnel, un pas vers plus de clarté intérieure.</p>
+      </div>
+      <button class="close-modal">Fermer</button>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-suivi">
+    <div class="modal-content">
+      <img src="https://source.unsplash.com/featured/?chart,wellbeing" alt="">
+      <div class="modal-text">
+        <h2>Suivi d’humeur</h2>
+        <p>Observe ton évolution au fil du temps. Découvre les moments forts, les périodes calmes, et apprends à repérer ce qui t’influence le plus.</p>
+      </div>
+      <button class="close-modal">Fermer</button>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-minimal">
+    <div class="modal-content">
+      <img src="https://source.unsplash.com/featured/?minimal,calm" alt="">
+      <div class="modal-text">
+        <h2>Minimal et apaisant</h2>
+        <p>Une interface épurée et respirante. Aucune distraction, juste ton ressenti et la sérénité d’un espace clair.</p>
+      </div>
+      <button class="close-modal">Fermer</button>
+    </div>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.card');
+    const modals = document.querySelectorAll('.modal');
+    const overlay = document.getElementById('modal-overlay');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.modal;
+        document.getElementById(`modal-${id}`).classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // empêche le scroll
+      });
+    });
+
+    document.querySelectorAll('.close-modal, #modal-overlay').forEach(el => {
+      el.addEventListener('click', () => {
+        modals.forEach(m => m.classList.remove('active'));
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+  </script>
 </body>
 </html>
