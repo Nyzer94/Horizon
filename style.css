@@ -43,13 +43,17 @@ nav ul {
 
 nav a {
   text-decoration: none;
-  color: var(--deep-blue);
-  font-weight: 500;
-  transition: color 0.2s;
+  color: white;
+  background: var(--deep-green);
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 nav a:hover {
-  color: var(--deep-green);
+  background: #145c4c;
+  transform: scale(1.05);
 }
 
 .hero h1 {
