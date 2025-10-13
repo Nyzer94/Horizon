@@ -164,3 +164,48 @@ footer{text-align:center;padding:2rem;font-size:.9rem;color:var(--deep-blue);bac
 @media (max-width:700px){nav{flex-direction:column;gap:.6rem;border-radius:16px}nav ul{order:2}nav .logo{order:1} .subcontent{flex-direction:column}}
 @media (max-width:480px){.hero h1{font-size:1.8rem}.subimage{height:180px}}
 
+/* ===== GLASS EFFECT ===== */
+nav {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.modal {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* ===== HERO BACKGROUND ANIMATION ===== */
+.hero-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  background: radial-gradient(circle at 30% 40%, rgba(62,160,132,0.2), transparent 70%),
+              radial-gradient(circle at 70% 60%, rgba(50,74,95,0.2), transparent 70%);
+  animation: moveGradients 15s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes moveGradients {
+  from { background-position: 30% 40%, 70% 60%; }
+  to   { background-position: 40% 50%, 60% 50%; }
+}
+/* ===== FADE-IN ON SCROLL ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* ===== SOFT SHADOWS ===== */
+.cta, .card {
+  box-shadow: 0 6px 20px rgba(46,125,104,0.15);
+}
+.cta:hover, .card:hover {
+  box-shadow: 0 8px 28px rgba(46,125,104,0.25);
+}
