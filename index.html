@@ -34,6 +34,40 @@
     <div class="hero">
   <h1 id="countdown" style="font-size:2.5rem;"></h1>
   <p>Note ton humeur, observe ton évolution, et trouve des conseils pour retrouver ton équilibre émotionnel.</p>
+  <!-- Layout: two stacked cards left, phone preview center, two stacked cards right -->
+  <div class="hero-layout">
+    <div class="cards-column left">
+      <button class="card" data-modal="journal" data-video="videos/journal.mp4">
+        <h3>📅 Journal</h3>
+        <p>Note tes émotions et réflexions.</p>
+      </button>
+      <button class="card" data-modal="suivi" data-video="videos/suivi.mp4">
+        <h3>📊 Suivi</h3>
+        <p>Visualise ton bien-être.</p>
+      </button>
+    </div>
+
+    <div class="phone-preview" id="phone-preview">
+      <div class="phone-frame">
+        <video id="phone-video" playsinline muted loop preload="metadata" poster="images/phone-poster.jpg">
+          <source src="videos/journal.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+    <div class="cards-column right">
+      <button class="card" data-modal="minimal" data-video="videos/minimal.mp4">
+        <h3>🌈 Minimal</h3>
+        <p>Interface douce et apaisante.</p>
+      </button>
+      <button class="card empty-card" aria-label="Ajouter" title="Ajouter une carte">
+        <h3>＋</h3>
+        <p>Ajouter</p>
+      </button>
+    </div>
+  </div>
+
   <button id="newsletter-btn" class="cta">Recevoir la newsletter</button>
       <script>
         // Compte à rebours jusqu'au 15 janvier 2026
@@ -64,7 +98,7 @@
     <section id="about" class="section light">
       <div class="container">
         <h2>🧘‍♀️ Ton espace émotionnel</h2>
-        <p><strong>Life is Yours</strong> t’aide à comprendre ton humeur au fil du temps. Grâce à un calendrier intuitif et des graphiques simples, tu peux suivre ton bien-être et cultiver ta sérénité.</p>
+        <p><strong>Horizon</strong> t’aide à comprendre ton humeur au fil du temps. Grâce à un calendrier intuitif et des graphiques simples, tu peux suivre ton bien-être et cultiver ta sérénité.</p>
       </div>
     </section>
 
@@ -98,7 +132,7 @@
   </main>
 
   <footer>
-    <p>© 2025 Life is Yours • Créé avec 🌿 par Rayan & l’équipe</p>
+    <p>© 2025 Horizon • Créé par Rayan & Yanis</p>
   </footer>
 
   <!-- 🌿 POPUPS -->
@@ -171,14 +205,61 @@
       document.body.style.overflow = '';
     });
 
+    // Modal opening only for cards having data-modal (skip empty card)
     buttons.forEach(btn => {
       btn.addEventListener('click', () => {
         const id = btn.dataset.modal;
+        if (!id) return; // empty card
         document.getElementById(`modal-${id}`).classList.add('active');
         overlay.classList.add('active');
         document.body.style.overflow = 'hidden'; // empêche le scroll
       });
     });
+
+    // Video preview handlers for the two-left / phone / two-right layout
+    (function() {
+      const phoneVideo = document.getElementById('phone-video');
+      const cards = document.querySelectorAll('.hero .card');
+
+      function loadAndPlay(src, muted = true) {
+        if (!src) return;
+        if (phoneVideo.getAttribute('src') !== src) {
+          phoneVideo.pause();
+          phoneVideo.src = src;
+          phoneVideo.load();
+        }
+        phoneVideo.muted = muted;
+        phoneVideo.play().catch(()=>{});
+      }
+
+      cards.forEach(card => {
+        const videoSrc = card.dataset.video;
+        // hover -> preview muted
+        card.addEventListener('mouseenter', () => {
+          if (!videoSrc) return;
+          loadAndPlay(videoSrc, true);
+        });
+        // leave -> mute
+        card.addEventListener('mouseleave', () => {
+          if (!phoneVideo.paused) phoneVideo.muted = true;
+        });
+        // click/tap -> play unmuted and open modal if present
+        card.addEventListener('click', (e) => {
+          if (videoSrc) loadAndPlay(videoSrc, false);
+          const id = card.dataset.modal;
+          if (id) {
+            document.getElementById(`modal-${id}`).classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          }
+        });
+        // touch support: also play preview on touchstart
+        card.addEventListener('touchstart', () => {
+          if (!videoSrc) return;
+          loadAndPlay(videoSrc, true);
+        }, {passive:true});
+      });
+    })();
 
     document.querySelectorAll('.close-modal, #modal-overlay').forEach(el => {
       el.addEventListener('click', () => {
