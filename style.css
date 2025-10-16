@@ -1,61 +1,3 @@
-/* ===== MODALS ===== */
-.modal-overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(6px);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity .3s ease;
-  z-index: 9;
-}
-
-.modal {
-  position: fixed;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%) scale(0.95);
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-  max-width: 720px;
-  width: 90%;
-  opacity: 0;
-  visibility: hidden;
-  transition: all .3s ease;
-  z-index: 10;
-  padding: 0;
-}
-
-.modal-content {
-  padding: 2rem;
-  text-align: center;
-}
-
-.close-modal {
-  margin-top: 1.5rem;
-  background: var(--deep-green);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  padding: 0.7rem 1.5rem;
-  font-size: 1rem;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background .2s;
-}
-.close-modal:hover { background: var(--accent-green); }
-
-.modal.active {
-  opacity: 1;
-  visibility: visible;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.modal-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
 :root{
   --beige: #f7f4ec;
   --deep-green: #2e7d68;
@@ -164,48 +106,75 @@ footer{text-align:center;padding:2rem;font-size:.9rem;color:var(--deep-blue);bac
 @media (max-width:700px){nav{flex-direction:column;gap:.6rem;border-radius:16px}nav ul{order:2}nav .logo{order:1} .subcontent{flex-direction:column}}
 @media (max-width:480px){.hero h1{font-size:1.8rem}.subimage{height:180px}}
 
-/* ===== GLASS EFFECT ===== */
-nav {
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+/* ===== MODALS ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s ease;
+  z-index: 9;
 }
 
 .modal {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(18px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  max-width: 720px;
+  width: 90%;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .3s ease;
+  z-index: 10;
+  padding: 0;
 }
 
-/* ===== HERO BACKGROUND ANIMATION ===== */
-.hero-bg {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: 0;
-  background: radial-gradient(circle at 30% 40%, rgba(62,160,132,0.2), transparent 70%),
-              radial-gradient(circle at 70% 60%, rgba(50,74,95,0.2), transparent 70%);
-  animation: moveGradients 15s ease-in-out infinite alternate;
-  pointer-events: none;
+.modal-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-@keyframes moveGradients {
-  from { background-position: 30% 40%, 70% 60%; }
-  to   { background-position: 40% 50%, 60% 50%; }
+
+.modal-content img {
+  width: 100%;
+  border-radius: 14px;
+  object-fit: cover;
+  max-height: 260px;
+  margin-bottom: 1rem;
 }
-/* ===== FADE-IN ON SCROLL ===== */
-.fade-in {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s ease;
+
+.modal-text {
+  text-align: center;
+  color: var(--deep-blue);
 }
-.fade-in.visible {
+
+.close-modal {
+  margin-top: 1rem;
+  background: var(--deep-green);
+  color: white;
+  border: none;
+  padding: .7rem 1.3rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background .2s;
+}
+.close-modal:hover { background: var(--accent-green); }
+
+.modal.active {
   opacity: 1;
-  transform: translateY(0);
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
 }
-/* ===== SOFT SHADOWS ===== */
-.cta, .card {
-  box-shadow: 0 6px 20px rgba(46,125,104,0.15);
-}
-.cta:hover, .card:hover {
-  box-shadow: 0 8px 28px rgba(46,125,104,0.25);
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
 }
