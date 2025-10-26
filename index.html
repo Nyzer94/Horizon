@@ -24,11 +24,11 @@
   <header>
     <nav>
       <div class="logo">🌿 HORIZON</div>
-      <ul>
-        <li><a href="#about">À propos</a></li>
-        <li><a href="#features">Fonctionnalités</a></li>
-        <li><a href="#download">Télécharger</a></li>
-      </ul>
+      <div class="nav-links">
+        <ul>
+          <li><a href="#download" class="download-link">Télécharger</a></li>
+        </ul>
+      </div>
     </nav>
 
     <div class="hero">
@@ -53,6 +53,8 @@
           <source src="videos/journal.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
+        <!-- Poster fallback shown when video missing or fails to load -->
+        <img id="phone-poster-img" src="images/phone-poster.jpg" alt="Aperçu de l'app" class="phone-poster-img" />
       </div>
     </div>
 
@@ -95,10 +97,58 @@
   </header>
 
   <main>
-    <section id="about" class="section light">
+    <section id="reviews" class="section light">
       <div class="container">
-        <h2>🧘‍♀️ Ton espace émotionnel</h2>
-        <p><strong>Horizon</strong> t’aide à comprendre ton humeur au fil du temps. Grâce à un calendrier intuitif et des graphiques simples, tu peux suivre ton bien-être et cultiver ta sérénité.</p>
+        <h2>🗣️ Ce que disent les utilisateurs</h2>
+        <div class="reviews-wrap">
+          <button class="rev-arrow left" aria-label="Précédent">◀</button>
+          <div class="reviews-track" id="reviews-track">
+            <!-- 7 review cards (will loop) -->
+            <div class="review">
+              <div class="rev-head"><span class="rev-name">Lola</span><img class="rev-avatar" src="images/avatar1.png" alt=""></div>
+              <div class="rev-stars">★★★★★</div>
+              <p class="rev-text">« J’utilise Horizon chaque soir, ça m’aide à prendre du recul. »</p>
+              <div class="rev-date">12 juin 2025</div>
+            </div>
+            <div class="review">
+              <div class="rev-head"><span class="rev-name">Sam</span><img class="rev-avatar" src="images/avatar2.png" alt=""></div>
+              <div class="rev-stars">★★★★★</div>
+              <p class="rev-text">« Simple et apaisant — parfait pour commencer la journée. »</p>
+              <div class="rev-date">3 juillet 2025</div>
+            </div>
+            <div class="review">
+              <div class="rev-head"><span class="rev-name">Marina</span><img class="rev-avatar" src="images/avatar3.png" alt=""></div>
+              <div class="rev-stars">★★★★☆</div>
+              <p class="rev-text">« Design doux, très agréable. »</p>
+              <div class="rev-date">21 mai 2025</div>
+            </div>
+            <div class="review">
+              <div class="rev-head"><span class="rev-name">Noé</span><img class="rev-avatar" src="images/avatar4.png" alt=""></div>
+              <div class="rev-stars">★★★★★</div>
+              <p class="rev-text">« Les graphiques m’ont aidé à comprendre mes patterns. »</p>
+              <div class="rev-date">2 août 2025</div>
+            </div>
+            <div class="review">
+              <div class="rev-head"><span class="rev-name">Alya</span><img class="rev-avatar" src="images/avatar5.png" alt=""></div>
+              <div class="rev-stars">★★★★☆</div>
+              <p class="rev-text">« Interface calme, super expérience. »</p>
+              <div class="rev-date">28 avril 2025</div>
+            </div>
+            <div class="review">
+              <div class="rev-head"><span class="rev-name">Rayan</span><img class="rev-avatar" src="images/avatar6.png" alt=""></div>
+              <div class="rev-stars">★★★★★</div>
+              <p class="rev-text">« Utile et bien pensé. »</p>
+              <div class="rev-date">1 janvier 2025</div>
+            </div>
+            <div class="review">
+              <div class="rev-head"><span class="rev-name">Yanis</span><img class="rev-avatar" src="images/avatar7.png" alt=""></div>
+              <div class="rev-stars">★★★★★</div>
+              <p class="rev-text">« J’adore le style minimal, apaisant. »</p>
+              <div class="rev-date">14 mars 2025</div>
+            </div>
+          </div>
+          <button class="rev-arrow right" aria-label="Suivant">▶</button>
+        </div>
       </div>
     </section>
 
@@ -207,6 +257,7 @@
     // Video preview handlers for the two-left / phone / two-right layout
     (function() {
       const phoneVideo = document.getElementById('phone-video');
+      const phonePoster = document.getElementById('phone-poster-img');
       const cards = document.querySelectorAll('.hero .card');
 
       function loadAndPlay(src, muted = true) {
@@ -247,6 +298,18 @@
           loadAndPlay(videoSrc, true);
         }, {passive:true});
       });
+
+      // Hide poster when video can play; show poster on error or when no src
+      phoneVideo.addEventListener('playing', () => { if (phonePoster) phonePoster.style.display = 'none'; });
+      phoneVideo.addEventListener('pause', () => { if (phonePoster) phonePoster.style.display = phoneVideo.src ? 'none' : 'block'; });
+      phoneVideo.addEventListener('error', () => { if (phonePoster) phonePoster.style.display = 'block'; });
+      // initial state: if source missing, show poster
+      if (!phoneVideo.querySelector('source') || !phoneVideo.querySelector('source').getAttribute('src')) {
+        if (phonePoster) phonePoster.style.display = 'block';
+      } else {
+        // try to load, but keep poster until playing
+        phonePoster.style.display = 'block';
+      }
     })();
 
     document.querySelectorAll('.close-modal, #modal-overlay').forEach(el => {
@@ -265,6 +328,34 @@
         document.body.style.overflow = '';
       }
     });
+
+    // Reviews carousel: drag, arrows, infinite-like loop
+    (function() {
+      const track = document.getElementById('reviews-track');
+      const leftBtn = document.querySelector('.rev-arrow.left');
+      const rightBtn = document.querySelector('.rev-arrow.right');
+      let isDown = false, startX, scrollLeft;
+
+      // clone nodes to each side for smooth loop illusion
+      const items = Array.from(track.children);
+      items.forEach(node => track.appendChild(node.cloneNode(true)));
+
+      track.addEventListener('mousedown', (e) => { isDown = true; startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; track.classList.add('dragging'); });
+      track.addEventListener('mouseleave', () => { isDown = false; track.classList.remove('dragging'); });
+      track.addEventListener('mouseup', () => { isDown = false; track.classList.remove('dragging'); });
+      track.addEventListener('mousemove', (e) => { if(!isDown) return; e.preventDefault(); const x = e.pageX - track.offsetLeft; const walk = (x - startX) * 1.2; track.scrollLeft = scrollLeft - walk; });
+      // touch
+      track.addEventListener('touchstart', (e) => { startX = e.touches[0].pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
+      track.addEventListener('touchmove', (e) => { const x = e.touches[0].pageX - track.offsetLeft; const walk = (x - startX) * 1.2; track.scrollLeft = scrollLeft - walk; }, {passive:true});
+
+      leftBtn.addEventListener('click', () => { track.scrollBy({left: -320, behavior:'smooth'}); });
+      rightBtn.addEventListener('click', () => { track.scrollBy({left: 320, behavior:'smooth'}); });
+
+      // optional: auto scroll
+      let auto = setInterval(() => { track.scrollBy({left: 320, behavior:'smooth'}) }, 4500);
+      [track, leftBtn, rightBtn].forEach(el => el.addEventListener('mouseenter', () => clearInterval(auto)));
+      [track, leftBtn, rightBtn].forEach(el => el.addEventListener('mouseleave', () => { auto = setInterval(() => { track.scrollBy({left: 320, behavior:'smooth'}) }, 4500); }));
+    })();
   </script>
 </body>
 </html>
