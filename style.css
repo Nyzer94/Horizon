@@ -208,10 +208,22 @@
   }
   /* Phone preview */
   .phone-preview { display:flex; justify-content:center; margin:1rem 0 1rem 0; z-index:1 }
-  .phone-frame { width:220px; height:460px; border-radius:34px; background:linear-gradient(180deg, #ffffff, #f7f4ec); box-shadow:0 20px 60px rgba(50,74,95,0.12); padding:12px; display:flex; align-items:center; justify-content:center; backdrop-filter: blur(8px); border:4px solid rgba(255,255,255,0.6); }
-  .phone-frame video { width:100%; height:100%; border-radius:22px; object-fit:cover; display:block }
+  .phone-frame {
+    width:260px;
+    height:520px;
+    border-radius:18px;
+    background: transparent; /* let background show through */
+    box-shadow: 0 12px 30px rgba(34,38,50,0.06);
+    padding: 2px; /* very thin padding so inner media fills the frame */
+    display:flex; align-items:center; justify-content:center;
+    backdrop-filter: blur(4px);
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.45); /* very thin border */
+    overflow: hidden;
+  }
+  .phone-frame video { width:100%; height:100%; border-radius:12px; object-fit:cover; display:block }
 
-  .phone-poster-img { position:absolute; width:100%; height:100%; object-fit:cover; border-radius:22px; display:block }
+  .phone-poster-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:12px; display:block }
 
   @media (max-width:700px) {
     .phone-frame { width:160px; height:330px }
@@ -235,18 +247,34 @@
     background:linear-gradient(120deg,var(--beige),#ffffff);
   }
   header::before{
-    content:"";
-    position:absolute;
-    top:-50%;
-    left:50%;
-    transform:translateX(-50%);
-    width:140%;
-    height:200%;
-    background:radial-gradient(circle at center,#e6f2ef 0%,#ffffff 70%);
-    border-radius:50%;
-    z-index:0;
+    /* Blurred background image layer */
+    content: "";
+    position: absolute;
+    inset: 0; /* cover the header area */
+    background-image: url('images/fond1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(8px) brightness(0.95);
+    z-index: 0;
   }
-  nav,.hero{position:relative;z-index:1}
+  /* Decorative radial overlay on top of the blurred image (not blurred) */
+  /* Decorative radial overlay on top of the blurred image (not blurred) */
+header::after{
+  content:"";
+  position:absolute;
+  top:-50%;
+  left:50%;
+  transform:translateX(-50%);
+  width:140%;
+  height:200%;
+  background:radial-gradient(circle at center, rgba(230,242,239,0.3) 0%, rgba(255,255,255,0.2) 70%);
+  border-radius:25%;
+  z-index:1;
+  pointer-events:none;
+  opacity: 0.6; /* Ajoute cette ligne pour plus de transparence */
+}
+  nav,.hero{position:relative;z-index:2}
 
   /* NAV */
   .nav-container{max-width:1000px;margin:0 auto 2rem;padding:0 1rem;display:flex;justify-content:center}
@@ -260,22 +288,45 @@
   .nav-links a:hover{background:rgba(42,96,72,0.06);transform:none}
   .nav-links a.active{background:rgba(42,96,72,0.08);box-shadow:0 6px 18px rgba(42,96,72,0.06)}
 
-  /* Make the Télécharger link a pill like the newsletter CTA */
+/* Hero background image
+   Put your desired background image here: images/fond1.jpg
+   If the image is missing the gradient fallback will be used. */
+header {
+  /* background handled by header::before (blurred image) and header::after (decorative radial)
+     keep header itself transparent so the ::before image shows through */
+  background: transparent;
+}
+
+/* Download badge inside the nav: replace images/appstore-badge.png with your file */
+.download-badge { height: 36px; display: inline-block; vertical-align: middle; }
+
+/* Thinner, subtler borders for cards and review blocks */
+.cards-track .card { border: 1px solid rgba(34,38,50,0.04); }
+.card { border: 1px solid rgba(34,38,50,0.04); }
+.review { border: 1px solid rgba(34,38,50,0.04); }
+
+  /* Download badge: when using an image badge we want the image only
+     Keep the link wrapper transparent so the badge is shown as-is.
+     If you need a text-only pill, add the class .download-link.text */
   .download-link {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    text-decoration: none;
+  }
+  .download-link .download-badge{ display:block; height:36px; }
+  .download-link.text {
+    display:inline-block;
     background: var(--deep-green);
     color: white !important;
     padding: 0.55rem 0.95rem;
     border-radius: 999px;
     font-weight: 700;
     box-shadow: 0 8px 24px rgba(34,38,50,0.08);
-    text-decoration: none;
-    transition: background .18s, transform .12s, box-shadow .12s;
-  }
-  .download-link:hover {
-    background: var(--accent-green);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(34,38,50,0.12);
   }
 
 /* Personality tweaks */
@@ -298,11 +349,39 @@
 
 @media (max-width:900px){.review{min-width:240px}.reviews-track{padding:0.6rem}}
 
+  /* Make hero cards slightly translucent so the background image shows through */
+  .hero .card {
+    background: rgba(255,255,255,0.62) !important; /* translucent */
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.35);
+    box-shadow: 0 10px 30px rgba(34,38,50,0.06);
+  }
+
   /* HERO */
   .hero h1{font-family:"Le Monde Livre Std",serif;font-size:2.8rem;margin:0 0 1rem;color:var(--deep-blue);opacity:0;animation:fadeInUp .8s ease .1s forwards}
   .hero p{max-width:680px;margin:0 auto 1.7rem;font-size:1.05rem;color:var(--deep-blue);opacity:0;animation:fadeInUp .8s ease .3s forwards}
   .cta{display:inline-block;background:var(--deep-green);color:white;padding:.9rem 1.7rem;border-radius:25px;text-decoration:none;font-weight:600;transition:background .3s;opacity:0;animation:fadeInUp .8s ease .5s forwards}
   .cta:hover{background:var(--accent-green)}
+
+/* Premium section (duplicate of "Notre histoire" but with DA green background) */
+#premium{background:linear-gradient(180deg,var(--deep-green),var(--accent-green));color:var(--beige);padding:3.2rem 1.5rem}
+#premium .container{color:var(--beige);max-width:980px;margin:0 auto;text-align:center}
+#premium h2{color:var(--beige);margin-bottom:0.6rem}
+#premium p{color:rgba(242,227,213,0.95)}
+/* Gold / metallic style for premium CTA */
+#premium .cta{
+  background: linear-gradient(135deg, #d4af37 0%, #f6d365 50%, #b8860b 100%);
+  color: #222632;
+  box-shadow: 0 8px 24px rgba(180,140,60,0.18);
+  border-radius: 28px;
+  padding: 0.9rem 1.6rem;
+  font-weight:700;
+}
+#premium .cta:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 12px 34px rgba(180,140,60,0.22);
+}
 
   /* MAIN SECTIONS */
   .section{padding:3.2rem 1.5rem}
@@ -363,7 +442,7 @@
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    z-index: 0;
+    z-index: -1; /* put the decorative gradients behind the blurred image */
     background: radial-gradient(circle at 30% 40%, rgba(62,160,132,0.2), transparent 70%),
                 radial-gradient(circle at 70% 60%, rgba(50,74,95,0.2), transparent 70%);
     animation: moveGradients 15s ease-in-out infinite alternate;
