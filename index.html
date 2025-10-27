@@ -22,7 +22,21 @@
 </head>
 <body>
   <header>
-    <nav>
+  <nav class="topbar">
+      <div class="social-links">
+        <a href="#" class="social" aria-label="Instagram">
+          <!-- Instagram SVG -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 8.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 6.5h.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#" class="social" aria-label="TikTok">
+          <!-- TikTok-like SVG -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 8v8a4 4 0 104 4V6h2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#" class="social" aria-label="Twitter">
+          <!-- Twitter SVG -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0012 7v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
       <div class="logo">🌿 HORIZON</div>
       <div class="nav-links">
         <ul>
@@ -37,8 +51,10 @@
     </nav>
 
     <div class="hero">
-  <h1 id="countdown" style="font-size:2.5rem;"></h1>
-  <p>Note ton humeur, observe ton évolution, et trouve des conseils pour retrouver ton équilibre émotionnel.</p>
+      <div class="hero-head">
+        <h1 id="countdown" style="font-size:2.5rem;"></h1>
+        <p>Note ton humeur, observe ton évolution, et trouve des conseils pour retrouver ton équilibre émotionnel.</p>
+      </div>
   <!-- Layout: two stacked cards left, phone preview center, two stacked cards right -->
   <div class="hero-layout">
     <div class="cards-column left">
@@ -75,7 +91,10 @@
     </div>
   </div>
 
-  <button id="newsletter-btn" class="cta">Recevoir la newsletter</button>
+  <div class="cta-group">
+    <button id="newsletter-btn" class="cta translucent">Recevoir la newsletter</button>
+    <button id="download-beta" class="cta translucent">Télécharger la bêta</button>
+  </div>
       <script>
         // Compte à rebours jusqu'au 15 janvier 2026
         function updateCountdown() {
@@ -179,13 +198,7 @@
       </div>
     </section>
 
-    <section id="download" class="section light">
-      <div class="container">
-        <h2>📲 Bientôt disponible</h2>
-        <p>L’app arrive sur iOS — inscris-toi pour la bêta et les updates.</p>
-        <a href="#" class="cta">Me prévenir du lancement</a>
-      </div>
-    </section>
+    <!-- Removed the 'Bientôt disponible' section as requested -->
   </main>
 
   <footer>
