@@ -158,14 +158,14 @@
   /* Reset simple */
   *{box-sizing:border-box}
   body{
-    margin:0;
-    font-family:"Hind Guntur",sans-serif;
-    background:var(--beige);
-    color:var(--text);
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    line-height:1.6;
-  }
+      margin:0;
+      font-family: 'Times New Roman', Times, serif;
+      background:var(--beige);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.6;
+    }
 
   /* HEADER + OVAL */
   header{
@@ -243,7 +243,7 @@
     .cards-column .card { width:160px }
     .phone-preview { order:2; margin: 0.6rem 0 }
   }
-    padding:6rem 1.5rem 4rem;
+  padding:6rem 0 4rem; /* make header full-bleed left/right */
     background:linear-gradient(120deg,var(--beige),#ffffff);
   }
   header::before{
@@ -275,6 +275,58 @@ header::after{
   opacity: 0.6; /* Ajoute cette ligne pour plus de transparence */
 }
   nav,.hero{position:relative;z-index:2}
+
+  /* Topbar (fixed) */
+  .topbar{
+    position:fixed;
+    top:0;left:0;right:0;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0.6rem 1rem;gap:1rem;
+    backdrop-filter: blur(8px);
+    background: rgba(255,255,255,0.04); /* subtle glass */
+    border-bottom: none; /* remove visible bottom bar */
+    z-index:9999;
+  }
+  .topbar .social-links{display:flex;gap:0.45rem;align-items:center}
+  .topbar .social{display:inline-flex;width:36px;height:36px;align-items:center;justify-content:center;border-radius:8px;background:rgba(255,255,255,0.5);color:var(--deep-green);text-decoration:none;border:1px solid rgba(0,0,0,0.03);transition:transform .12s,box-shadow .12s}
+  .topbar .social:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(34,38,50,0.08)}
+
+  /* push page content under fixed topbar */
+  body{padding-top:64px}
+
+  /* hero-head: faded background behind countdown and intro text */
+  .hero-head{display:inline-block;padding:0.8rem 1.2rem;border-radius:12px;background:linear-gradient(180deg, rgba(0,0,0,0.36), rgba(0,0,0,0.16));backdrop-filter:blur(6px);color:var(--beige);box-shadow:0 12px 30px rgba(0,0,0,0.22);margin:0 auto 1rem auto}
+  .hero-head h1,.hero-head p{color:var(--beige);margin:0}
+  .hero-head p{opacity:0.98}
+
+  /* CTA group and translucent green buttons */
+  .cta-group{display:inline-flex;gap:0.6rem;align-items:center;margin-top:1rem}
+  .cta.translucent{background:rgba(42,96,72,0.26);color:var(--beige);border:1px solid var(--deep-green);padding:.7rem 1rem;border-radius:20px;transition:transform .12s,box-shadow .12s}
+  .cta.translucent:hover{transform:scale(1.06);box-shadow:0 10px 26px rgba(42,96,72,0.16)}
+
+  /* smooth fades between sections: subtle top/bottom fades */
+  .section{position:relative}
+  .section::before,.section::after{content:"";position:absolute;left:0;right:0;height:96px;pointer-events:none}
+  .section::before{top:-96px;background:linear-gradient(to bottom,rgba(255,255,255,0.0),rgba(255,255,255,1))}
+  .section::after{bottom:-96px;background:linear-gradient(to top,rgba(255,255,255,0.0),rgba(255,255,255,1))}
+
+  /* Slightly more futuristic smoothness */
+  *{transition:background-color .4s ease,color .3s ease,box-shadow .25s ease,transform .12s ease}
+
+  /* Social icons in nav (left of logo) */
+  .social-links{display:flex;gap:0.45rem;align-items:center;margin-right:0.6rem}
+  .social-links .social{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:8px;color:var(--deep-blue);background:rgba(255,255,255,0.6);text-decoration:none;border:1px solid rgba(0,0,0,0.04)}
+  .social-links .social svg{width:16px;height:16px}
+  .social-links .social:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(0,0,0,0.06)}
+
+  /* Hero headline background and color */
+  .hero-head{display:inline-block;padding:0.6rem 1rem;border-radius:12px;background:linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.18));backdrop-filter: blur(4px);-webkit-backdrop-filter: blur(4px);}
+  .hero-head #countdown, .hero-head p{color:var(--beige);margin:0}
+  .hero-head p{opacity:0.95;margin-top:0.45rem}
+
+  /* Newsletter button: thinner border, solid color background and slight scale on hover */
+  #newsletter-btn{background:transparent;border:1px solid var(--deep-green);color:var(--deep-green);padding:0.65rem 1.2rem;border-radius:22px;transition:transform .14s ease,box-shadow .14s}
+  #newsletter-btn:hover{transform:scale(1.05);box-shadow:0 10px 24px rgba(42,96,72,0.08)}
 
   /* NAV */
   .nav-container{max-width:1000px;margin:0 auto 2rem;padding:0 1rem;display:flex;justify-content:center}
