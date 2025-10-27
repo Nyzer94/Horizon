@@ -26,7 +26,12 @@
       <div class="logo">🌿 HORIZON</div>
       <div class="nav-links">
         <ul>
-          <li><a href="#download" class="download-link">Télécharger</a></li>
+          <li>
+            <!-- Replace this image with your App Store / download badge at: images/appstore-badge.png -->
+            <a href="#download" class="download-link" aria-label="Télécharger">
+              <img src="images/appstore-badge.png" alt="Télécharger sur l'App Store" class="download-badge">
+            </a>
+          </li>
         </ul>
       </div>
     </nav>
@@ -38,18 +43,18 @@
   <div class="hero-layout">
     <div class="cards-column left">
       <button class="card" data-modal="journal" data-video="videos/journal.mp4">
-        <h3>📅 Journal</h3>
+        <h3>Journal</h3>
         <p>Note tes émotions et réflexions.</p>
       </button>
       <button class="card" data-modal="suivi" data-video="videos/suivi.mp4">
-        <h3>📊 Suivi</h3>
+        <h3>Suivi</h3>
         <p>Visualise ton bien-être.</p>
       </button>
     </div>
 
     <div class="phone-preview" id="phone-preview">
       <div class="phone-frame">
-        <video id="phone-video" playsinline muted loop preload="metadata" poster="images/phone-poster.jpg">
+        <video id="phone-video" playsinline muted loop preload="metadata" poster="images/tel.png">
           <source src="videos/journal.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
@@ -60,12 +65,12 @@
 
     <div class="cards-column right">
       <button class="card" data-modal="minimal" data-video="videos/minimal.mp4">
-        <h3>🌈 Minimal</h3>
+        <h3>Minimaliste</h3>
         <p>Interface douce et apaisante.</p>
       </button>
-      <button class="card empty-card" aria-label="Ajouter" title="Ajouter une carte">
-        <h3>＋</h3>
-        <p>Ajouter</p>
+      <button class="card empty-card" aria-label="Partage" title="Partage ton humeur">
+        <h3>Partage</h3>
+        <p>Partage ton humeur avec tes amis</p>
       </button>
     </div>
   </div>
@@ -159,6 +164,20 @@
         <p class="muted">Exemple : comment l’idée est venue, les premiers prototypes, retours d’utilisateurs, et la vision pour l’avenir. Remplace ce texte par ta propre histoire.</p>
       </div>
     </section>
+    <!-- PREMIUM section duplicated from 'Notre histoire' but focused on Premium benefits -->
+    <section id="premium" class="section">
+      <div class="container">
+        <h2>🔒 Accédez au PREMIUM</h2>
+        <p>Le premium d'Horizon offre des fonctionnalités avancées pour vous accompagner au quotidien : export de données, tendances détaillées, thèmes exclusifs, et partage sécurisé avec vos proches.</p>
+        <ul style="max-width:680px;margin:0.8rem auto 1rem auto;text-align:left;line-height:1.6;">
+          <li><strong>Analyse avancée :</strong> graphiques approfondis et rapports hebdomadaires.</li>
+          <li><strong>Thèmes exclusifs :</strong> personnalise l'app avec des ambiances apaisantes.</li>
+          <li><strong>Partage sécurisé :</strong> invite des proches et partage des moments choisis.</li>
+          <li><strong>Priorité bêta :</strong> teste les nouvelles fonctionnalités en avant-première.</li>
+        </ul>
+        <a href="#download" class="cta">Découvrir le PREMIUM</a>
+      </div>
+    </section>
 
     <section id="download" class="section light">
       <div class="container">
@@ -221,6 +240,47 @@
     </div>
   </div>
 
+  <!-- Premium details modal -->
+  <div class="modal" id="modal-premium">
+    <div class="modal-content">
+      <h2>Détails du PREMIUM</h2>
+      <p>Comparez rapidement les fonctionnalités gratuites et celles incluses dans le mode Premium :</p>
+      <div style="overflow:auto;margin:1rem 0;">
+        <table style="width:100%;border-collapse:collapse;max-width:820px;margin:0 auto;text-align:left;">
+          <thead>
+            <tr>
+              <th style="padding:0.6rem;border-bottom:1px solid rgba(0,0,0,0.06);width:50%">Gratuit</th>
+              <th style="padding:0.6rem;border-bottom:1px solid rgba(0,0,0,0.06);width:50%">Premium</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:0.6rem;border-bottom:1px solid rgba(0,0,0,0.04);">Journal quotidien</td>
+              <td style="padding:0.6rem;border-bottom:1px solid rgba(0,0,0,0.04);">Journal + export CSV / PDF</td>
+            </tr>
+            <tr>
+              <td style="padding:0.6rem;border-bottom:1px solid rgba(0,0,0,0.04);">Suivi simple</td>
+              <td style="padding:0.6rem;border-bottom:1px solid rgba(0,0,0,0.04);">Analyses avancées & tendances</td>
+            </tr>
+            <tr>
+              <td style="padding:0.6rem;border-bottom:1px solid rgba(0,0,0,0.04);">Thèmes de base</td>
+              <td style="padding:0.6rem;border-bottom:1px solid rgba(0,0,0,0.04);">Thèmes exclusifs et personnalisés</td>
+            </tr>
+            <tr>
+              <td style="padding:0.6rem;border-bottom:1px solid rgba(0,0,0,0.04);">Partage limité</td>
+              <td style="padding:0.6rem;border-bottom:1px solid rgba(0,0,0,0.04);">Partage sécurisé avancé</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="display:flex;gap:0.8rem;justify-content:center;margin-top:1rem;flex-wrap:wrap">
+        <button id="premium-month" class="cta">0,99€/mois</button>
+        <button id="premium-life" class="cta">4,99€ à vie</button>
+      </div>
+      <button class="close-modal" style="margin-top:1rem">Fermer</button>
+    </div>
+  </div>
+
   <script>
     const buttons = document.querySelectorAll('.card');
     const modals = document.querySelectorAll('.modal');
@@ -238,6 +298,33 @@
     document.getElementById('newsletter-form').addEventListener('submit', function(e) {
       e.preventDefault();
       alert('Merci pour votre inscription !');
+      modals.forEach(m => m.classList.remove('active'));
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+
+    // Premium CTA -> open premium modal
+    const premiumCta = document.querySelector('#premium .cta');
+    if (premiumCta) {
+      premiumCta.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('modal-premium').classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    }
+
+    // Pricing buttons inside premium modal
+    const premiumMonth = document.getElementById('premium-month');
+    const premiumLife = document.getElementById('premium-life');
+    if (premiumMonth) premiumMonth.addEventListener('click', function(){
+      alert('Vous avez choisi l\'abonnement mensuel à 0,99€/mois. Merci !');
+      modals.forEach(m => m.classList.remove('active'));
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+    if (premiumLife) premiumLife.addEventListener('click', function(){
+      alert('Vous avez choisi l\'offre à vie à 4,99€. Merci !');
       modals.forEach(m => m.classList.remove('active'));
       overlay.classList.remove('active');
       document.body.style.overflow = '';
