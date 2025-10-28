@@ -267,12 +267,14 @@ header::after{
   left:50%;
   transform:translateX(-50%);
   width:140%;
-  height:200%;
-  background:radial-gradient(circle at center, rgba(230,242,239,0.3) 0%, rgba(255,255,255,0.2) 70%);
+  height:220%;
+  /* combine a soft radial decoration with a bottom linear fade so the header's lower edge blends into the page */
+  background: radial-gradient(circle at center, rgba(230,242,239,0.28) 0%, rgba(255,255,255,0.18) 70%),
+              linear-gradient(to bottom, rgba(242,227,213,0) 60%, rgba(242,227,213,0.92) 100%);
   border-radius:25%;
   z-index:1;
   pointer-events:none;
-  opacity: 0.6; /* Ajoute cette ligne pour plus de transparence */
+  opacity: 0.72; /* slight increase so fade is visible */
 }
   nav,.hero{position:relative;z-index:2}
 
@@ -283,10 +285,12 @@ header::after{
     display:flex;align-items:center;justify-content:space-between;
     padding:0.6rem 1rem;gap:1rem;
     backdrop-filter: blur(8px);
-    background: rgba(255,255,255,0.04); /* subtle glass */
+    background: rgba(242, 227, 213,0.04); /* subtle glass */
     border-bottom: none; /* remove visible bottom bar */
     z-index:9999;
   }
+  /* Ensure .topbar truly spans the full viewport width and is not constrained by the generic nav max-width rule later in the file */
+  nav.topbar{max-width:100%;margin:0;padding:0.6rem 1rem;border-radius:0;background:transparent}
   .topbar .social-links{display:flex;gap:0.45rem;align-items:center}
   .topbar .social{display:inline-flex;width:36px;height:36px;align-items:center;justify-content:center;border-radius:8px;background:rgba(255,255,255,0.5);color:var(--deep-green);text-decoration:none;border:1px solid rgba(0,0,0,0.03);transition:transform .12s,box-shadow .12s}
   .topbar .social:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(34,38,50,0.08)}
@@ -299,10 +303,31 @@ header::after{
   .hero-head h1,.hero-head p{color:var(--beige);margin:0}
   .hero-head p{opacity:0.98}
 
-  /* CTA group and translucent green buttons */
+  /* CTA group and unified translucent green buttons */
   .cta-group{display:inline-flex;gap:0.6rem;align-items:center;margin-top:1rem}
-  .cta.translucent{background:rgba(42,96,72,0.26);color:var(--beige);border:1px solid var(--deep-green);padding:.7rem 1rem;border-radius:20px;transition:transform .12s,box-shadow .12s}
-  .cta.translucent:hover{transform:scale(1.06);box-shadow:0 10px 26px rgba(42,96,72,0.16)}
+  /* Shared translucent CTA style for both buttons */
+  /* Shared translucent CTA style for both buttons */
+  .cta.translucent{
+    background: rgba(42, 96, 72, 0.65); /* vert transparent */
+    color: white !important;
+    padding: .9rem 1.7rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform .2s, background .3s, box-shadow .2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  /* Hover: lift slightly and change background like main CTA */
+  .cta.translucent:hover{
+    transform: translateY(-6px);
+    background: rgba(42, 96, 72, 0.95); /* vert opaque */
+    box-shadow: 0 12px 34px rgba(42,96,72,0.28);
+  }
 
   /* smooth fades between sections: subtle top/bottom fades */
   .section{position:relative}
@@ -324,9 +349,10 @@ header::after{
   .hero-head #countdown, .hero-head p{color:var(--beige);margin:0}
   .hero-head p{opacity:0.95;margin-top:0.45rem}
 
-  /* Newsletter button: thinner border, solid color background and slight scale on hover */
-  #newsletter-btn{background:transparent;border:1px solid var(--deep-green);color:var(--deep-green);padding:0.65rem 1.2rem;border-radius:22px;transition:transform .14s ease,box-shadow .14s}
-  #newsletter-btn:hover{transform:scale(1.05);box-shadow:0 10px 24px rgba(42,96,72,0.08)}
+  /* Make the intro paragraph in the hero explicitly white for contrast */
+  .hero-head p { color: #ffffff !important; }
+
+  /* Remove old #newsletter-btn rules (we use .cta.translucent now) */
 
   /* NAV */
   .nav-container{max-width:1000px;margin:0 auto 2rem;padding:0 1rem;display:flex;justify-content:center}
@@ -343,10 +369,32 @@ header::after{
 /* Hero background image
    Put your desired background image here: images/fond1.jpg
    If the image is missing the gradient fallback will be used. */
-header {
+html, body {
+  margin: 0;
+  padding: 0;
+  background: transparent; /* ou background: none; */
+}
+
+   header {
   /* background handled by header::before (blurred image) and header::after (decorative radial)
      keep header itself transparent so the ::before image shows through */
   background: transparent;
+}
+
+header {
+  margin-top: 0;
+  position: relative;
+  top: 0;
+  z-index: 1;
+}
+
+.topbar {
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
 }
 
 /* Download badge inside the nav: replace images/appstore-badge.png with your file */
@@ -403,7 +451,7 @@ header {
 
   /* Make hero cards slightly translucent so the background image shows through */
   .hero .card {
-    background: rgba(255,255,255,0.62) !important; /* translucent */
+    background: rgba(242, 227, 213, 0.5) !important; /* translucent */
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     border: 1px solid rgba(255,255,255,0.35);
@@ -417,10 +465,74 @@ header {
   .cta:hover{background:var(--accent-green)}
 
 /* Premium section (duplicate of "Notre histoire" but with DA green background) */
-#premium{background:linear-gradient(180deg,var(--deep-green),var(--accent-green));color:var(--beige);padding:3.2rem 1.5rem}
-#premium .container{color:var(--beige);max-width:980px;margin:0 auto;text-align:center}
+#premium{background:linear-gradient(180deg,var(--deep-green),var(--accent-green));color:var(--beige);padding:3.2rem 1.5rem;position:relative}
+#premium .container{color:var(--beige);max-width:980px;margin:0 auto;text-align:center;position:relative;z-index:1}
 #premium h2{color:var(--beige);margin-bottom:0.6rem}
 #premium p{color:rgba(242,227,213,0.95)}
+
+/* Smooth beige -> green transition between #our-story and #premium
+   Implemented as a pseudo-element on #premium that fades upward into the beige of #our-story. */
+#our-story{background:var(--beige);position:relative;padding:10rem 2rem}
+#our-story .container{max-width:1100px;margin:0 auto;position:relative;z-index:1}
+#premium::before{
+  content: "";
+  position: absolute;
+  top: -140px;
+  left: 0;
+  right: 0;
+  height: 140px;
+  pointer-events: none;
+  z-index: 0; /* sits behind premium content but above the previous section background */
+  background: linear-gradient(to top,
+    rgba(42,96,72,1) 0%,        /* var(--deep-green) solid at the bottom */
+    rgba(62,160,132,0.75) 40%,  /* var(--accent-green) mid */
+    rgba(242,227,213,0) 100%    /* fade to transparent so the beige shows through */
+  );
+}
+
+/* Fade from white (reviews) -> beige (our-story) */
+/* our-story top fade: reduced height so it doesn't overlay the previous section content */
+#our-story::before{
+  content: "";
+  position: absolute;
+  top: -80px;
+  left: 0;
+  right: 0;
+  height: 80px;
+  pointer-events: none;
+  z-index: 0; /* behind our-story content */
+  background: linear-gradient(to top,
+    rgba(242,227,213,0.95) 0%,      /* beige at the top of the fade */
+    rgba(242,227,213,0.55) 55%,
+    rgba(255,255,255,0) 100%     /* transparent into the white reviews section */
+  );
+}
+#our-story .container{position:relative;z-index:1}
+
+/* Fade from premium green down to white before the footer */
+#premium::after{
+  content: "";
+  position: absolute;
+  bottom: -140px;
+  left: 0;
+  right: 0;
+  height: 140px;
+  pointer-events: none;
+  z-index: 2; /* above premium background but below premium content (container z-index is higher) */
+  background: linear-gradient(to bottom,
+    rgba(42,96,72,1) 0%,     /* solid deep green at the top */
+    rgba(62,160,132,0.6) 50%,
+    rgba(242,227,213,1) 100% /* fade into site beige towards the page bottom */
+  );
+}
+#premium .container{position:relative;z-index:3}
+/* Make footer sit under the gradient and use beige background to match the requested fade */
+footer{position:relative;z-index:1;background:var(--beige)}
+
+/* Increase spacing for reviews and our-story so the fades don't overlap content */
+#reviews{padding:11rem 2rem}
+#reviews .container{max-width:1100px;position:relative;z-index:1;margin:0 auto}
+
 /* Gold / metallic style for premium CTA */
 #premium .cta{
   background: linear-gradient(135deg, #d4af37 0%, #f6d365 50%, #b8860b 100%);
