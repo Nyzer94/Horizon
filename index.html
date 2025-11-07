@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,7 +6,7 @@
   <title>HORIZON — Un jour à la fois</title>
   <link href="https://fonts.googleapis.com/css2?family=Hind+Guntur:wght@400;600&family=Le+Monde+Livre+Std&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <!-- Animation d’apparition au scroll -->
+  <!-- Animation d'apparition au scroll -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const observer = new IntersectionObserver((entries) => {
@@ -18,22 +17,18 @@
       document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
     });
   </script>
-
 </head>
 <body>
   <header>
-  <nav class="topbar">
+    <nav class="topbar">
       <div class="social-links">
         <a href="#" class="social" aria-label="Instagram">
-          <!-- Instagram SVG -->
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 8.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 6.5h.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a href="#" class="social" aria-label="TikTok">
-          <!-- TikTok-like SVG -->
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 8v8a4 4 0 104 4V6h2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a href="#" class="social" aria-label="Twitter">
-          <!-- Twitter SVG -->
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0012 7v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
@@ -41,7 +36,6 @@
       <div class="nav-links">
         <ul>
           <li>
-            <!-- Replace this image with your App Store / download badge at: images/appstore-badge.png -->
             <a href="#download" class="download-link" aria-label="Télécharger">
               <img src="images/appstore-badge.png" alt="Télécharger sur l'App Store" class="download-badge">
             </a>
@@ -55,48 +49,58 @@
         <h1 id="countdown" style="font-size:2.5rem;"></h1>
         <p>Note ton humeur, observe ton évolution, et trouve des conseils pour retrouver ton équilibre émotionnel.</p>
       </div>
-  <!-- Layout: two stacked cards left, phone preview center, two stacked cards right -->
-  <div class="hero-layout">
-    <div class="cards-column left">
-      <button class="card" data-modal="journal" data-video="videos/journal.mp4">
-        <h3>Journal</h3>
-        <p>Note tes émotions et réflexions.</p>
-      </button>
-      <button class="card" data-modal="suivi" data-video="videos/suivi.mp4">
-        <h3>Suivi</h3>
-        <p>Visualise ton bien-être.</p>
-      </button>
-    </div>
 
-    <div class="phone-preview" id="phone-preview">
-      <div class="phone-frame">
-        <video id="phone-video" playsinline muted loop preload="metadata" poster="images/tel.png">
-          <source src="videos/journal.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-        <!-- Poster fallback shown when video missing or fails to load -->
-        <img id="phone-poster-img" src="images/phone-poster.jpg" alt="Aperçu de l'app" class="phone-poster-img" />
+      <div class="hero-layout">
+        <div class="cards-column left">
+          <button class="card" data-modal="journal" data-video="videos/journal.mp4">
+            <h3>Journal</h3>
+            <p>Note tes émotions et réflexions.</p>
+          </button>
+          <button class="card" data-modal="suivi" data-video="videos/suivi.mp4">
+            <h3>Suivi</h3>
+            <p>Visualise ton bien-être.</p>
+          </button>
+        </div>
+
+        <div class="phone-preview" id="phone-preview">
+          <div class="phone-frame">
+            <div class="phone-carousel" id="phone-carousel">
+              <img src="images/tel.png" alt="Écran 1 de l'app" class="phone-screen active">
+              <img src="images/tel2.png" alt="Écran 2 de l'app" class="phone-screen">
+              <img src="images/tel3.png" alt="Écran 3 de l'app" class="phone-screen">
+              <img src="images/tel4.png" alt="Écran 4 de l'app" class="phone-screen">
+            </div>
+            
+            <div class="phone-dots">
+              <span class="dot active" data-index="0"></span>
+              <span class="dot" data-index="1"></span>
+              <span class="dot" data-index="2"></span>
+              <span class="dot" data-index="3"></span>
+            </div>
+            
+            <button class="phone-arrow prev" aria-label="Écran précédent">‹</button>
+            <button class="phone-arrow next" aria-label="Écran suivant">›</button>
+          </div>
+        </div>
+
+        <div class="cards-column right">
+          <button class="card" data-modal="minimal" data-video="videos/minimal.mp4">
+            <h3>Minimaliste</h3>
+            <p>Interface douce et apaisante.</p>
+          </button>
+          <button class="card empty-card" aria-label="Partage" title="Partage ton humeur">
+            <h3>Partage</h3>
+            <p>Partage ton humeur avec tes amis</p>
+          </button>
+        </div>
       </div>
-    </div>
 
-    <div class="cards-column right">
-      <button class="card" data-modal="minimal" data-video="videos/minimal.mp4">
-        <h3>Minimaliste</h3>
-        <p>Interface douce et apaisante.</p>
-      </button>
-      <button class="card empty-card" aria-label="Partage" title="Partage ton humeur">
-        <h3>Partage</h3>
-        <p>Partage ton humeur avec tes amis</p>
-      </button>
-    </div>
-  </div>
+      <div class="cta-group">
+        <button id="newsletter-btn" class="cta translucent">Recevoir la newsletter</button>
+        <button id="download-beta" class="cta translucent">Télécharger la bêta</button>
+      </div>
 
-  <div class="cta-group">
-    <button id="newsletter-btn" class="cta translucent">Recevoir la newsletter</button>
-    <button id="download-beta" class="cta translucent">Télécharger la bêta</button>
-  </div>
       <script>
-        // Compte à rebours jusqu'au 15 janvier 2026
         function updateCountdown() {
           const targetDate = new Date('2026-01-15T00:00:00');
           const now = new Date();
@@ -115,9 +119,7 @@
         setInterval(updateCountdown, 1000);
       </script>
     </div>
-    <!-- Fond dynamique doux -->
-  <div class="hero-bg"></div>
-
+    <div class="hero-bg"></div>
   </header>
 
   <main>
@@ -127,11 +129,10 @@
         <div class="reviews-wrap">
           <button class="rev-arrow left" aria-label="Précédent">◀</button>
           <div class="reviews-track" id="reviews-track">
-            <!-- 7 review cards (will loop) -->
             <div class="review">
               <div class="rev-head"><span class="rev-name">Lola</span><img class="rev-avatar" src="images/avatar1.png" alt=""></div>
               <div class="rev-stars">★★★★★</div>
-              <p class="rev-text">« J’utilise Horizon chaque soir, ça m’aide à prendre du recul. »</p>
+              <p class="rev-text">« J'utilise Horizon chaque soir, ça m'aide à prendre du recul. »</p>
               <div class="rev-date">12 juin 2025</div>
             </div>
             <div class="review">
@@ -149,7 +150,7 @@
             <div class="review">
               <div class="rev-head"><span class="rev-name">Noé</span><img class="rev-avatar" src="images/avatar4.png" alt=""></div>
               <div class="rev-stars">★★★★★</div>
-              <p class="rev-text">« Les graphiques m’ont aidé à comprendre mes patterns. »</p>
+              <p class="rev-text">« Les graphiques m'ont aidé à comprendre mes patterns. »</p>
               <div class="rev-date">2 août 2025</div>
             </div>
             <div class="review">
@@ -167,7 +168,7 @@
             <div class="review">
               <div class="rev-head"><span class="rev-name">Yanis</span><img class="rev-avatar" src="images/avatar7.png" alt=""></div>
               <div class="rev-stars">★★★★★</div>
-              <p class="rev-text">« J’adore le style minimal, apaisant. »</p>
+              <p class="rev-text">« J'adore le style minimal, apaisant. »</p>
               <div class="rev-date">14 mars 2025</div>
             </div>
           </div>
@@ -179,15 +180,15 @@
     <section id="our-story" class="section">
       <div class="container">
         <h2>Notre histoire</h2>
-        <p>Horizon est né d’une envie simple : proposer un espace calme et bienveillant pour suivre son humeur au quotidien. Nous sommes une petite équipe passionnée par le design empathique et la santé mentale. Ici tu trouveras nos motivations, les étapes du projet et les personnes derrière l’app.</p>
-        <p class="muted">Exemple : comment l’idée est venue, les premiers prototypes, retours d’utilisateurs, et la vision pour l’avenir. Remplace ce texte par ta propre histoire.</p>
+        <p>Horizon est né d'une envie simple : proposer un espace calme et bienveillant pour suivre son humeur au quotidien. Nous sommes une petite équipe passionnée par le design empathique et la santé mentale. Ici tu trouveras nos motivations, les étapes du projet et les personnes derrière l'app.</p>
+        <p class="muted">Exemple : comment l'idée est venue, les premiers prototypes, retours d'utilisateurs, et la vision pour l'avenir. Remplace ce texte par ta propre histoire.</p>
       </div>
     </section>
-    <!-- PREMIUM section duplicated from 'Notre histoire' but focused on Premium benefits -->
+
     <section id="premium" class="section">
       <div class="container">
         <h2>🔒 Accédez au PREMIUM</h2>
-        <p>Le premium d'Horizon offre des fonctionnalités avancées pour vous accompagner au quotidien : export de données, tendances détaillées, thèmes exclusifs, et partage sécurisé avec vos proches.</p>
+        <p>Le premium d'Horizon offre des fonctionnalités avancées pour vous accompagner au quotidien : export de données, tendances détaillées, thèmes exclusifs, et partage sécurisé avec vos proches.</p>
         <ul style="max-width:680px;margin:0.8rem auto 1rem auto;text-align:left;line-height:1.6;">
           <li><strong>Analyse avancée :</strong> graphiques approfondis et rapports hebdomadaires.</li>
           <li><strong>Thèmes exclusifs :</strong> personnalise l'app avec des ambiances apaisantes.</li>
@@ -197,23 +198,20 @@
         <a href="#download" class="cta">Découvrir le PREMIUM</a>
       </div>
     </section>
-
-    <!-- Removed the 'Bientôt disponible' section as requested -->
   </main>
 
   <footer>
     <p>© 2025 Horizon • Créé par Rayan & Yanis</p>
   </footer>
 
-  <!-- 🌿 POPUPS -->
-  <!-- Popup Newsletter -->
+  <!-- MODALS -->
   <div class="modal" id="modal-newsletter">
     <div class="modal-content">
       <h2>Inscription à la newsletter</h2>
       <form id="newsletter-form" style="display:flex;flex-direction:column;gap:1rem;align-items:center;">
         <input type="text" name="prenom" placeholder="Prénom" required style="padding:0.7rem 1rem;border-radius:8px;border:1px solid #ccc;width:80%;max-width:320px;">
         <input type="email" name="email" placeholder="Email" required style="padding:0.7rem 1rem;border-radius:8px;border:1px solid #ccc;width:80%;max-width:320px;">
-        <button type="submit" class="cta" style="width:80%;max-width:320px;">S’inscrire</button>
+        <button type="submit" class="cta" style="width:80%;max-width:320px;">S'inscrire</button>
       </form>
       <button class="close-modal">Fermer</button>
     </div>
@@ -233,10 +231,10 @@
 
   <div class="modal" id="modal-suivi">
     <div class="modal-content">
-      <img src="images/suivi.jpg" alt="Suivi d’humeur" style="max-width:100%;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,0.08);margin-bottom:1.2rem;">
+      <img src="images/suivi.jpg" alt="Suivi d'humeur" style="max-width:100%;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,0.08);margin-bottom:1.2rem;">
       <div class="modal-text">
-        <h2>Suivi d’humeur</h2>
-        <p>Observe ton évolution au fil du temps. Découvre les moments forts, les périodes calmes, et apprends à repérer ce qui t’influence le plus.</p>
+        <h2>Suivi d'humeur</h2>
+        <p>Observe ton évolution au fil du temps. Découvre les moments forts, les périodes calmes, et apprends à repérer ce qui t'influence le plus.</p>
       </div>
       <button class="close-modal">Fermer</button>
     </div>
@@ -247,13 +245,12 @@
       <img src="images/minimal.jpg" alt="Minimal et apaisant" style="max-width:100%;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,0.08);margin-bottom:1.2rem;">
       <div class="modal-text">
         <h2>Minimal et apaisant</h2>
-        <p>Une interface épurée et respirante. Aucune distraction, juste ton ressenti et la sérénité d’un espace clair.</p>
+        <p>Une interface épurée et respirante. Aucune distraction, juste ton ressenti et la sérénité d'un espace clair.</p>
       </div>
       <button class="close-modal">Fermer</button>
     </div>
   </div>
 
-  <!-- Premium details modal -->
   <div class="modal" id="modal-premium">
     <div class="modal-content">
       <h2>Détails du PREMIUM</h2>
@@ -295,28 +292,37 @@
   </div>
 
   <script>
-    const buttons = document.querySelectorAll('.card');
+    // ===== GESTION DES MODALS =====
     const modals = document.querySelectorAll('.modal');
     const overlay = document.getElementById('modal-overlay');
 
-    // Bouton newsletter
-    const newsletterBtn = document.getElementById('newsletter-btn');
-    newsletterBtn.addEventListener('click', () => {
-      document.getElementById('modal-newsletter').classList.add('active');
-      overlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    });
-
-    // (Optionnel) Gestion du formulaire
-    document.getElementById('newsletter-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('Merci pour votre inscription !');
+    function closeAllModals() {
       modals.forEach(m => m.classList.remove('active'));
       overlay.classList.remove('active');
       document.body.style.overflow = '';
-    });
+    }
 
-    // Premium CTA -> open premium modal
+    // Bouton newsletter
+    const newsletterBtn = document.getElementById('newsletter-btn');
+    if (newsletterBtn) {
+      newsletterBtn.addEventListener('click', () => {
+        document.getElementById('modal-newsletter').classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    }
+
+    // Formulaire newsletter
+    const newsletterForm = document.getElementById('newsletter-form');
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Merci pour votre inscription !');
+        closeAllModals();
+      });
+    }
+
+    // Premium CTA
     const premiumCta = document.querySelector('#premium .cta');
     if (premiumCta) {
       premiumCta.addEventListener('click', function(e) {
@@ -327,116 +333,73 @@
       });
     }
 
-    // Pricing buttons inside premium modal
+    // Pricing buttons
     const premiumMonth = document.getElementById('premium-month');
     const premiumLife = document.getElementById('premium-life');
-    if (premiumMonth) premiumMonth.addEventListener('click', function(){
-      alert('Vous avez choisi l\'abonnement mensuel à 0,99€/mois. Merci !');
-      modals.forEach(m => m.classList.remove('active'));
-      overlay.classList.remove('active');
-      document.body.style.overflow = '';
-    });
-    if (premiumLife) premiumLife.addEventListener('click', function(){
-      alert('Vous avez choisi l\'offre à vie à 4,99€. Merci !');
-      modals.forEach(m => m.classList.remove('active'));
-      overlay.classList.remove('active');
-      document.body.style.overflow = '';
-    });
+    if (premiumMonth) {
+      premiumMonth.addEventListener('click', function(){
+        alert('Super choix ! L\'abonnement mensuel à 0,99€/mois sera disponible au lancement. 🎉');
+        closeAllModals();
+      });
+    }
+    if (premiumLife) {
+      premiumLife.addEventListener('click', function(){
+        alert('Excellent ! L\'offre à vie à 4,99€ sera disponible dès le lancement. 🚀');
+        closeAllModals();
+      });
+    }
 
-    // Modal opening only for cards having data-modal (skip empty card)
+    // Modal opening for cards
+    const buttons = document.querySelectorAll('.card');
     buttons.forEach(btn => {
       btn.addEventListener('click', () => {
         const id = btn.dataset.modal;
-        if (!id) return; // empty card
-        document.getElementById(`modal-${id}`).classList.add('active');
-        overlay.classList.add('active');
-        document.body.style.overflow = 'hidden'; // empêche le scroll
-      });
-    });
-
-    // Video preview handlers for the two-left / phone / two-right layout
-    (function() {
-      const phoneVideo = document.getElementById('phone-video');
-      const phonePoster = document.getElementById('phone-poster-img');
-      const cards = document.querySelectorAll('.hero .card');
-
-      function loadAndPlay(src, muted = true) {
-        if (!src) return;
-        if (phoneVideo.getAttribute('src') !== src) {
-          phoneVideo.pause();
-          phoneVideo.src = src;
-          phoneVideo.load();
+        if (!id) return;
+        const modal = document.getElementById(`modal-${id}`);
+        if (modal) {
+          modal.classList.add('active');
+          overlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
         }
-        phoneVideo.muted = muted;
-        phoneVideo.play().catch(()=>{});
-      }
-
-      cards.forEach(card => {
-        const videoSrc = card.dataset.video;
-        // hover -> preview muted
-        card.addEventListener('mouseenter', () => {
-          if (!videoSrc) return;
-          loadAndPlay(videoSrc, true);
-        });
-        // leave -> mute
-        card.addEventListener('mouseleave', () => {
-          if (!phoneVideo.paused) phoneVideo.muted = true;
-        });
-        // click/tap -> play unmuted and open modal if present
-        card.addEventListener('click', (e) => {
-          if (videoSrc) loadAndPlay(videoSrc, false);
-          const id = card.dataset.modal;
-          if (id) {
-            document.getElementById(`modal-${id}`).classList.add('active');
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-          }
-        });
-        // touch support: also play preview on touchstart
-        card.addEventListener('touchstart', () => {
-          if (!videoSrc) return;
-          loadAndPlay(videoSrc, true);
-        }, {passive:true});
-      });
-
-      // Hide poster when video can play; show poster on error or when no src
-      phoneVideo.addEventListener('playing', () => { if (phonePoster) phonePoster.style.display = 'none'; });
-      phoneVideo.addEventListener('pause', () => { if (phonePoster) phonePoster.style.display = phoneVideo.src ? 'none' : 'block'; });
-      phoneVideo.addEventListener('error', () => { if (phonePoster) phonePoster.style.display = 'block'; });
-      // initial state: if source missing, show poster
-      if (!phoneVideo.querySelector('source') || !phoneVideo.querySelector('source').getAttribute('src')) {
-        if (phonePoster) phonePoster.style.display = 'block';
-      } else {
-        // try to load, but keep poster until playing
-        phonePoster.style.display = 'block';
-      }
-    })();
-
-    document.querySelectorAll('.close-modal, #modal-overlay').forEach(el => {
-      el.addEventListener('click', () => {
-        modals.forEach(m => m.classList.remove('active'));
-        overlay.classList.remove('active');
-        document.body.style.overflow = '';
       });
     });
 
-    // Fermer les popups avec la touche Échap
+    // Fermer: boutons
+    document.querySelectorAll('.close-modal').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeAllModals();
+      });
+    });
+
+    // Fermer: overlay
+    if (overlay) {
+      overlay.addEventListener('click', () => {
+        closeAllModals();
+      });
+    }
+
+    // Fermer: Échap
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        modals.forEach(m => m.classList.remove('active'));
-        overlay.classList.remove('active');
-        document.body.style.overflow = '';
+        closeAllModals();
       }
     });
 
-    // Reviews carousel: drag, arrows, infinite-like loop
+    // Empêcher fermeture si clic à l'intérieur
+    document.querySelectorAll('.modal-content').forEach(content => {
+      content.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    });
+
+    // ===== REVIEWS CAROUSEL =====
     (function() {
       const track = document.getElementById('reviews-track');
       const leftBtn = document.querySelector('.rev-arrow.left');
       const rightBtn = document.querySelector('.rev-arrow.right');
       let isDown = false, startX, scrollLeft;
 
-      // clone nodes to each side for smooth loop illusion
       const items = Array.from(track.children);
       items.forEach(node => track.appendChild(node.cloneNode(true)));
 
@@ -444,18 +407,148 @@
       track.addEventListener('mouseleave', () => { isDown = false; track.classList.remove('dragging'); });
       track.addEventListener('mouseup', () => { isDown = false; track.classList.remove('dragging'); });
       track.addEventListener('mousemove', (e) => { if(!isDown) return; e.preventDefault(); const x = e.pageX - track.offsetLeft; const walk = (x - startX) * 1.2; track.scrollLeft = scrollLeft - walk; });
-      // touch
       track.addEventListener('touchstart', (e) => { startX = e.touches[0].pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
       track.addEventListener('touchmove', (e) => { const x = e.touches[0].pageX - track.offsetLeft; const walk = (x - startX) * 1.2; track.scrollLeft = scrollLeft - walk; }, {passive:true});
 
       leftBtn.addEventListener('click', () => { track.scrollBy({left: -320, behavior:'smooth'}); });
       rightBtn.addEventListener('click', () => { track.scrollBy({left: 320, behavior:'smooth'}); });
 
-      // optional: auto scroll
       let auto = setInterval(() => { track.scrollBy({left: 320, behavior:'smooth'}) }, 4500);
       [track, leftBtn, rightBtn].forEach(el => el.addEventListener('mouseenter', () => clearInterval(auto)));
       [track, leftBtn, rightBtn].forEach(el => el.addEventListener('mouseleave', () => { auto = setInterval(() => { track.scrollBy({left: 320, behavior:'smooth'}) }, 4500); }));
     })();
+
+    // ===== PHONE CAROUSEL =====
+    document.addEventListener('DOMContentLoaded', function() {
+      const carousel = document.getElementById('phone-carousel');
+      const screens = document.querySelectorAll('.phone-screen');
+      const dots = document.querySelectorAll('.phone-dots .dot');
+      const prevBtn = document.querySelector('.phone-arrow.prev');
+      const nextBtn = document.querySelector('.phone-arrow.next');
+      
+      const cards = document.querySelectorAll('.hero .card');
+      const cardsArray = Array.from(cards).filter(card => !card.classList.contains('empty-card'));
+      
+      if (!carousel || screens.length === 0) return;
+      
+      let currentIndex = 0;
+      let startX = 0, startY = 0;
+      let isDragging = false;
+
+      function updateActiveCard(index) {
+        cardsArray.forEach((card, i) => {
+          if (i === index) {
+            card.classList.add('active-card');
+          } else {
+            card.classList.remove('active-card');
+          }
+        });
+      }
+
+      function showScreen(index) {
+        if (index < 0) index = screens.length - 1;
+        if (index >= screens.length) index = 0;
+        
+        screens.forEach((screen, i) => {
+          screen.classList.remove('active', 'prev');
+          if (i < index) screen.classList.add('prev');
+        });
+        
+        dots.forEach(dot => dot.classList.remove('active'));
+        screens[index].classList.add('active');
+        dots[index].classList.add('active');
+        updateActiveCard(index);
+        currentIndex = index;
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          showScreen(currentIndex - 1);
+        });
+      }
+      
+      if (nextBtn) {
+        nextBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          showScreen(currentIndex + 1);
+        });
+      }
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          showScreen(index);
+        });
+      });
+
+      carousel.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        isDragging = true;
+      }, { passive: true });
+
+      carousel.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        
+        const endX = e.changedTouches[0].clientX;
+        const endY = e.changedTouches[0].clientY;
+        const diffX = startX - endX;
+        const diffY = startY - endY;
+        
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 30) {
+          if (diffX > 0) {
+            showScreen(currentIndex + 1);
+          } else {
+            showScreen(currentIndex - 1);
+          }
+        }
+      });
+
+      carousel.addEventListener('mousedown', (e) => {
+        startX = e.clientX;
+        isDragging = true;
+        carousel.classList.add('dragging');
+        carousel.style.cursor = 'grabbing';
+        e.preventDefault();
+      });
+
+      carousel.addEventListener('mouseup', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        carousel.classList.remove('dragging');
+        carousel.style.cursor = 'grab';
+        
+        const endX = e.clientX;
+        const diff = startX - endX;
+        
+        if (Math.abs(diff) > 30) {
+          if (diff > 0) {
+            showScreen(currentIndex + 1);
+          } else {
+            showScreen(currentIndex - 1);
+          }
+        }
+      });
+
+      carousel.addEventListener('mouseleave', () => {
+        if (isDragging) {
+          isDragging = false;
+          carousel.classList.remove('dragging');
+          carousel.style.cursor = 'grab';
+        }
+      });
+
+      carousel.addEventListener('dragstart', (e) => {
+        e.preventDefault();
+      });
+
+      showScreen(0);
+    });
   </script>
 </body>
 </html>
