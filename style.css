@@ -41,7 +41,7 @@ header::before{
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url('https://raw.githubusercontent.com/Nyzer94/Horizon/main/images/fond1.jpg');
+  background-image: url('images/fond1.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
