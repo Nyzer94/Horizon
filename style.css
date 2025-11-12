@@ -18,7 +18,7 @@ body{
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
   line-height:1.6;
-  padding-top:64px;
+  padding-top:0;
 }
 html, body {
   margin: 0;
@@ -67,7 +67,7 @@ nav,.hero{position:relative;z-index:2}
 
 /* ===== TOPBAR ===== */
 .topbar{
-  position:fixed;
+  position:absolute;
   top:0;left:0;right:0;
   display:flex;align-items:center;justify-content:space-between;
   padding:0.6rem 1rem;gap:1rem;
@@ -354,7 +354,22 @@ nav {
 .container{max-width:980px;margin:0 auto;text-align:center}
 
 /* ===== REVIEWS ===== */
-#reviews{padding:11rem 2rem}
+#reviews{padding:4rem 2rem;position:relative}
+#reviews::before{
+  content: "";
+  position: absolute;
+  top: -140px;
+  left: 0;
+  right: 0;
+  height: 140px;
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(to top,
+    rgba(255,255,255,1) 0%,
+    rgba(255,255,255,0.6) 50%,
+    rgba(242,227,213,0) 100%
+  );
+}
 #reviews .container{max-width:1100px;position:relative;z-index:1;margin:0 auto}
 
 .reviews-wrap{position:relative;display:flex;align-items:center;gap:1rem}
@@ -379,7 +394,7 @@ nav {
 .rev-arrow.right{margin-left:0.6rem}
 
 /* ===== OUR STORY ===== */
-#our-story{background:var(--beige);position:relative;padding:10rem 2rem}
+#our-story{background:var(--beige);position:relative;padding:4rem 2rem 8rem 2rem}
 #our-story .container{max-width:1100px;margin:0 auto;position:relative;z-index:1}
 #our-story::before{
   content: "";
@@ -395,6 +410,50 @@ nav {
     rgba(242,227,213,0.55) 55%,
     rgba(255,255,255,0) 100%
   );
+}
+
+/* Story layout avec alternance texte/image */
+.story-section {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin: 3rem 0;
+  text-align: left;
+}
+.story-section:first-of-type {
+  margin-top: 2rem;
+}
+.story-text {
+  flex: 1;
+  min-width: 0;
+}
+.story-text h3 {
+  color: var(--deep-green);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+.story-text p {
+  color: var(--text);
+  line-height: 1.8;
+  margin-bottom: 0.8rem;
+}
+.story-image {
+  flex: 1;
+  min-width: 0;
+}
+.story-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(34,38,50,0.1);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+/* Alternance : image à droite puis à gauche */
+.story-section:nth-child(odd) {
+  flex-direction: row;
+}
+.story-section:nth-child(even) {
+  flex-direction: row-reverse;
 }
 
 /* ===== PREMIUM ===== */
@@ -420,21 +479,6 @@ nav {
     rgba(42,96,72,1) 0%,
     rgba(62,160,132,0.75) 40%,
     rgba(242,227,213,0) 100%
-  );
-}
-#premium::after{
-  content: "";
-  position: absolute;
-  bottom: -140px;
-  left: 0;
-  right: 0;
-  height: 140px;
-  pointer-events: none;
-  z-index: 2;
-  background: linear-gradient(to bottom,
-    rgba(42,96,72,1) 0%,
-    rgba(62,160,132,0.6) 50%,
-    rgba(242,227,213,1) 100%
   );
 }
 #premium .cta{
@@ -468,9 +512,9 @@ nav {
   position: fixed;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%) scale(0.95);
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(30px) saturate(180%);
-  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25),
@@ -535,7 +579,7 @@ nav {
 }
 
 #modal-premium table {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 12px;
@@ -553,7 +597,7 @@ footer{
   font-size:.9rem;
   color:var(--deep-blue);
   background:var(--beige);
-  margin-top:2rem;
+  margin-top:0;
   position:relative;
   z-index:1;
 }
@@ -592,6 +636,13 @@ footer{
   .phone-preview { order:2; margin: 0.6rem 0 }
   .review{min-width:240px}
   .reviews-track{padding:0.6rem}
+  .story-section {
+    flex-direction: column !important;
+    gap: 2rem;
+  }
+  .story-text, .story-image {
+    width: 100%;
+  }
 }
 
 @media (max-width:700px){
