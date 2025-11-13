@@ -44,14 +44,26 @@ body {
   min-height: 100vh;
   background: linear-gradient(
     135deg,
-    #f7f2ec 0%,
-    #e9dbc6 25%,
-    #d8c5af 50%,
-    #b9c8a1 75%,
-    #88a77a 100%
+    #f2e3d5,
+    #2a6048,
+    #f2e3d5,
+    #2a6048
   );
-  position: relative;
+  background-size: 400% 400%;
+  animation: waveGradient 16s ease-in-out infinite;
+  transition: background 1s ease;
 }
+
+@keyframes waveGradient {
+  0%   { background-position: 0% 50%; }
+  25%  { background-position: 50% 100%; }
+  50%  { background-position: 100% 50%; }
+  75%  { background-position: 50% 0%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+
 
 
 /* ===== HEADER ===== */
